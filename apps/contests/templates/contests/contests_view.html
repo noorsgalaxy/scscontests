@@ -1,0 +1,102 @@
+{% extends 'base_html.html' %}
+{% load socialaccount %}
+      {% providers_media_js %}
+
+
+
+{% block body_content %}
+
+
+{% load staticfiles %}
+<link href="{% static 'scs_user/css/profile.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'>
+
+
+    <div id="canvas-header" class="header-section home-dev fill-dark  home-dev-2" style='margin-top: -100px;padding-bottom: 30px;font-family: "Whitney SSm A", "Whitney SSm B", "Avenir", "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Ubuntu", sans-serif'>
+
+      <div class="container--flex">
+	  <canvas id="demo-canvas" style="left:0px;right:0px;top:0px;position:absolute;"></canvas>
+        <h1 class="mjL mjR">Sliet Computer Society</h1>
+          <p class="large">Evolve With Us</p>
+      </div>
+    </div>
+
+
+<div class="container-fluid">
+<div class="row"  style="margin-top: 20px;margin-bottom: 20px">
+<h1 class="col-sm-offset-2 col-sm-6">{{ contest.name }}</h1>
+    <div class="col-sm-2" style="padding-top: 25px;">
+                {% if request.user.is_authenticated %}
+                {% if not is_registered %}
+                <a href="register/?cid={{ item.id }}" id="{{ item.id }}" class="btn btn-primary backbone start pull-right">
+                    Register
+                </a>
+                    {% else %}
+                    <a href="" id="{{ item.id }}" class="btn backbone start pull-right">
+                    Registered
+                </a>
+                    {% endif %}
+            {% else %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" fields="gender" %}" class="btn btn-primary backbone start pull-right">
+                    Login to Register
+                </a>
+            {% endif %}
+    </div>
+    </div>
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-8">
+        <p><pre>
+        {{ contest.description }}
+    </pre></p>
+
+        <footer class="track_content-footer clearfix">
+            <div class="small bold mdT pull-left">
+
+
+
+
+                        <span class="msR">
+                            <span class="zeta">Catagory: </span>
+                            {{ contest.catagory }}
+                        </span>
+
+
+                        <span class="msR">
+                            <span class="zeta">Starts: </span>
+                            {{ contest.start_time }}
+                        </span>
+
+
+
+
+
+                    <!--<span class="mlR"><span class="zeta">Ends: </span>
+                        {{ contest.end_time }}
+                    </span>-->
+
+
+
+
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div class="row"  style="margin-top: 20px;margin-bottom: 20px">
+<h1 class="col-sm-offset-2 col-sm-6">List of participants</h1>
+</div>
+<div class="row">
+
+    <div class="list-group col-sm-offset-4 col-sm-4" style="color: #0295FF">
+        {% for p in participants %}
+      <a href="/user/{{ p.username }}"
+         class="list-group-item {% if p.user == request.user.socialaccount_set.all.0 %}active{% endif %}"
+         style="border: 1px solid #0295ff;border-radius: 4px"     >
+          {{ p.user.extra_data.name }}
+      </a>
+        {% endfor %}
+    </div>
+
+</div>
+</div>
+{% endblock %}

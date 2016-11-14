@@ -1,0 +1,204 @@
+{% extends 'base_html.html' %}
+
+<style>
+</style>
+{% block body_content %}
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% load socialaccount %}
+{% providers_media_js %}
+{% load staticfiles %}
+<link href="{% static 'scs_user/css/profile.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'>
+
+
+<!--    <div id="canvas-header" class="header-section home-dev fill-dark  home-dev-2" style="margin-top: -60px;">
+
+      <div class="container--flex mjT pjT msB">
+	  <canvas id="demo-canvas" style="left:0px;right:0px;top:0px;position:absolute;"></canvas>
+
+
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+	<div class="row panel">
+		<div class="col-md-4 bg_blur" style="background-image: url('{{ social.get_avatar_url }}')">
+    	    
+		</div>
+        <div class="col-md-8  col-xs-12">
+
+           <img id="userimage" src="{{ social.get_avatar_url }}" class="img-thumbnail picture hidden-xs" />
+
+           <div class="header">
+                <h1> {{ request.user.first_name }} {{ request.user.last_name }}</h1>
+               <a href="{{ request.user.socialaccount_set.all.0.extra_data.link }}" style="color : #808080;"><h6>Facebook Profile</h6></a>
+                <h4>Web Developer</h4>
+                <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</span>
+           </div>
+        </div>
+    </div>   
+</div>
+</div>
+
+    <div class="block-center" style="width:350px;">
+
+                  <a href="/contests/"> <p class="text-center" style="margin-top:30px;"><button class="btn btn-primary signup-button fw" name="commit" value="request"  style="width: 250px; margin:0 auto; height:50px;font-size: large">Browse Contests</button></p></a>
+              </div>
+-->
+    </div>
+
+
+<div>
+
+
+
+    <div id="canvas-header" class="header-section home-dev fill-dark  home-dev-2" style='margin-top: -100px;padding-bottom: 30px;font-family: "Whitney SSm A", "Whitney SSm B", "Avenir", "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Ubuntu", sans-serif'>
+
+      <div class="container--flex">
+	  <canvas id="demo-canvas" style="left:0px;right:0px;top:0px;position:absolute;"></canvas>
+        <h1 class="mjL mjR">Sliet Computer Society</h1>
+          <p class="large">Evolve With Us</p>
+      </div>
+    </div>
+</div>
+<div class="row" style="z-index:0">
+<div class="col-md-2 col-md-offset-2 col-sm-offset-12">
+<img id="userimage" class="userimage" src="{{ social.get_avatar_url }}"  />
+</div>
+<div class="col-md-6">
+     <h1>{{ social.extra_data.first_name }} {{ social.extra_data.last_name }}</h1>
+    <a target="_blank" href="{{ social.extra_data.link }}" style="color : #808080;"><h6>Facebook Profile</h6></a>
+    <p>Username: {{ user_info.username }}</p>
+    <p>Email: {{ user_info.email }}</p>
+    <div id="pcontent">
+        <!--<p>College: <span id="college">sliet</span></p>
+        <p>Batch/Branch: <span id="branch">gcs</span></p>
+        <p>Year: <span id="year">2</span></p>
+        <p>About me: <span id="about">yaar</span></p>
+        <p>LinkedIn: <span id="linkedin">eaej</span></p>
+        <p>GitHub: <span id="github">ij</span></p>-->
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <pre id="about">{{ user_info.about }}</pre><br>
+                </div>
+            </div><br>
+            <div class="form-group">
+                <label for="college" class="col-sm-2 control-label">College: </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="college" readonly="readonly" style="cursor: default" value="{{ user_info.college }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="branch" class="col-sm-2 control-label">Branch: </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="branch" readonly="readonly" style="cursor: default" value="{{ user_info.branch }}">
+                </div>
+            </div>
+    </div>
+
+</div>
+</div>
+
+<h3 class="col-sm-offset-2 col-md-3" style="margin-top: 20px;margin-bottom: 20px">Contests {{ social.extra_data.first_name }} have Registered</h3>
+{% for item,is_registered in contests %}
+    <div id="contest-challenges-problem" class="content--list track_content col-md-6 col-md-offset-4" style="margin-bottom: 30px">
+        <div class="content--list_body">
+            <!-- Attempt Indicator -->
+            <header class="content--list_header row">
+                <!-- Challenge Title -->
+                <h4 class="challengecard-title msB span12 ">
+
+                        <a href="/contests/v/?cid={{ item.id }}" class="backbone ">{{ item.name }}</a>
+
+
+                </h4>
+
+                <ul class="span3 pull-right inline challenge_links">
+
+                    <!-- Discussion Icon -->
+
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/forum" class="backbone submit icon--grey" data-analytics="ViewForum" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Discussion"><i class="icon-comment icon--single"></i></a>
+                        </li>
+
+
+                    <!-- Leaderboard Icon -->
+
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/leaderboard" class="backbone submit icon--grey" data-analytics="ChallengeLeaderboard" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Leaderboard"><i class="icon-trophy icon--single"></i></a>
+                        </li>
+
+
+                    <!-- Submissions Icon -->
+
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/submissions" class="backbone icon--grey" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Submissions"><i class="icon-list-bullet-small icon--single"></i></a></li>
+
+                </ul>
+            </header>
+
+
+
+        </div>
+        <div>
+            <p style="text-indent: 10px;color: rgb(105, 127, 135);">{{ item.description }}</p>
+        </div>
+        <footer class="track_content-footer clearfix">
+            <div class="small bold mdT pull-left">
+
+
+
+
+                        <span class="msR">
+                            <span class="zeta">Catagory: </span>
+                            {{ item.catagory }}
+                        </span>
+
+
+                        <span class="msR">
+                            <span class="zeta">Starts: </span>
+                            {{ item.start_time }}
+                        </span>
+
+
+
+
+
+                    <!--<span class="mlR"><span class="zeta">Ends: </span>
+                        {{ item.end_time }}
+                    </span>-->
+
+
+
+
+            </div>
+
+
+            {% if request.user.is_authenticated %}
+                {% if not is_registered %}
+                <a href="/contests/register/?cid={{ item.id }}" id="{{ item.id }}" class="btn btn-primary backbone start pull-right">
+                    Register
+                </a>
+                    {% else %}
+                    <a href="/contests/v/?cid={{ item.id }}" id="{{ item.id }}" class="btn backbone start pull-right">
+                    View Contest
+                </a>
+                    {% endif %}
+            {% else %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" fields="gender" %}" class="btn btn-primary backbone start pull-right">
+                    Login to Register
+                </a>
+            {% endif %}
+        </footer>
+
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+
+ <script>
+
+ </script>
+{% endblock %}

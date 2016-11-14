@@ -1,0 +1,70 @@
+{% extends 'base_html.html' %}
+   
+{% block  body_content %}
+
+  {% load socialaccount %}
+      {% providers_media_js %}
+    {% load staticfiles %}
+
+    <div id="canvas-header" class="header-section home-dev fill-dark  home-dev-2" style="margin-top: -60px;">
+		
+      <div class="container--flex mjT pjT msB">
+	  <canvas id="demo-canvas" style="left:0px;right:0px;top:0px;position:absolute;"></canvas>
+
+          <h1 class="mjL mjR">Sliet Computer Society</h1>
+          <p class="large">Evolve With Us</p>
+          {% if not request.user.is_authenticated %}
+
+              <div class="homepage_signupgroup--legacy block-center" style="width:450px;">
+
+                  <a href="{% provider_login_url "facebook" method="js_sdk" fields="gender" %}"> <p class="text-center" style="margin-top:50px"><button class="btn btn-primary signup-button fw" name="commit" value="request"  style="width: 350px; margin:0 auto;" data-attr1="master">Sign Up &amp; Start Evolving</button></p></a>
+              </div>
+          {% endif %}
+
+            <!-- <p class="aside fnt-sz-small text-center psT mjB">
+               By signing up you agree to our <a target="_blank" href="">Terms of Service</a> and <a target="_blank" href="">Privacy Policy</a>
+             </p> -->
+      </div>
+    </div>
+
+<div class="static-section">
+  <div class="container--flex">
+    <div class="span-sm-16 span-md-16 span-lg-8 border-right">
+      <img alt="Tech" height="50px" src="{% static 'images/scs.png' %}" width="53px">
+      <h5>SCS</h5>
+      <h2 class="msT">Learn, Teach, Evolve</h2>
+      <p class="mmT pjL pjR">Sliet Computer Society is a community of people who wants to bring an evolution in the world.</p>
+      <a href="http://www.evolvescs.com" target="_blank" class="btn btn-flat mlT btn-primary">Visit Site</a>
+      <div class="border span-sm-12 block-center mjB mjT pjT"></div>
+
+      <blockquote class="pjT mjT">
+        <h4 class="txt-alt-grey text-left">scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs </h4>
+        <p class="text-left bold msT">- scs scs scs scs scs </p>
+      </blockquote>
+    </div>
+    <div class="span-sm-16 span-md-16 span-lg-8">
+      <img alt="Developers" height="50px" src="{% static 'images/compete.png' %}" width="53px">
+      <h5>Contests</h5>
+      <h2 class="msT">Code, Compete, Evolve</h2>
+      <p class="mmT pjL pjR">Test your knowledge, compete with people across the world to learn new things.</p>
+	  
+      <a href="" class="btn btn-flat mlT btn-primary">Compete</a>
+      <div class="border span-sm-12 block-center mjB pjT mjT"></div>
+      <blockquote class="pjT mjT">
+        <h4 class="txt-alt-grey text-left">scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs scs </h4>
+        <p class="text-left bold msT">- scs scs scs scs scs</p>
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

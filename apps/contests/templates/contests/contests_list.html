@@ -1,0 +1,124 @@
+{% extends 'base_html.html' %}
+{% load socialaccount %}
+      {% providers_media_js %}
+
+
+
+{% block body_content %}
+
+
+{% load staticfiles %}
+<link href="{% static 'scs_user/css/profile.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css'>
+
+
+    <div id="canvas-header" class="header-section home-dev fill-dark  home-dev-2" style='margin-top: -60px;font-family: "Whitney SSm A", "Whitney SSm B", "Avenir", "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Ubuntu", sans-serif'>
+
+      <div class="container--flex mjT pjT msB">
+	  <canvas id="demo-canvas" style="left:0px;right:0px;top:0px;position:absolute;"></canvas>
+        <h1 class="mjL mjR">Sliet Computer Society</h1>
+          <p class="large">Evolve With Us</p>
+      </div>
+    </div>
+
+
+
+
+<h1 class="col-sm-offset-2 col-md-3" style="margin-top: 20px;margin-bottom: 20px">Contests List</h1>
+    {% if contests_list %}
+    {% for item,is_registered in contests_list %}
+<div id="contest-challenges-problem" class="content--list track_content col-md-6 col-md-offset-4" style="margin-bottom: 30px">
+        <div class="content--list_body">
+            <!-- Attempt Indicator -->
+            <header class="content--list_header row">
+                <!-- Challenge Title -->
+                <h4 class="challengecard-title msB span12 ">
+                    
+                        <a href="v/?cid={{ item.id }}" class="backbone ">{{ item.name }}</a>
+                    
+                    
+                </h4>
+
+                <ul class="span3 pull-right inline challenge_links">
+
+                    <!-- Discussion Icon -->
+                    
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/forum" class="backbone submit icon--grey" data-analytics="ViewForum" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Discussion"><i class="icon-comment icon--single"></i></a>
+                        </li>
+                    
+
+                    <!-- Leaderboard Icon -->
+                    
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/leaderboard" class="backbone submit icon--grey" data-analytics="ChallengeLeaderboard" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Leaderboard"><i class="icon-trophy icon--single"></i></a>
+                        </li>
+                    
+
+                    <!-- Submissions Icon -->
+                    
+                        <li class="">
+                            <a href="/challenges/fibonacci-modified/submissions" class="backbone icon--grey" rel="tooltip" title="" data-attr1="fibonacci-modified" data-attr2="master" data-attr3="code" data-attr4="false" data-attr5="false" data-attr6="contest-challenge" data-attr7="45" data-attr10="0.7299546142208775" data-original-title="Challenge Submissions"><i class="icon-list-bullet-small icon--single"></i></a></li>
+                    
+                </ul>
+            </header>
+            
+            
+            
+        </div>
+        <div>
+            <p style="text-indent: 10px;color: rgb(105, 127, 135);">{{ item.description }}</p>
+        </div>
+        <footer class="track_content-footer clearfix">
+            <div class="small bold mdT pull-left">
+                
+                    
+
+
+                        <span class="msR">
+                            <span class="zeta">Catagory: </span>
+                            {{ item.catagory }}
+                        </span>
+
+
+                        <span class="msR">
+                            <span class="zeta">Starts: </span>
+                            {{ item.start_time }}
+                        </span>
+                    
+                
+
+
+                
+                    <!--<span class="mlR"><span class="zeta">Ends: </span>
+                        {{ item.end_time }}
+                    </span>-->
+                
+
+
+                
+            </div>
+
+
+            {% if request.user.is_authenticated %}
+                {% if not is_registered %}
+                <a href="register/?cid={{ item.id }}" id="{{ item.id }}" class="btn btn-primary backbone start pull-right">
+                    Register
+                </a>
+                    {% else %}
+                    <a href="v/?cid={{ item.id }}" id="{{ item.id }}" class="btn backbone start pull-right">
+                    View Contest
+                </a>
+                    {% endif %}
+            {% else %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" fields="gender" %}" class="btn btn-primary backbone start pull-right">
+                    Login to Register
+                </a>
+            {% endif %}
+        </footer>
+
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

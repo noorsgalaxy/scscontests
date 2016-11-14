@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+
+	</style>
+
+    <!-- favicon -->
+    <link href='{% static "images/logo.ico" %}' rel="shortcut-icon" type="image">
+
+    <!-- Typography -->
+    <link rel="stylesheet" id="js-hr-typography" type="text/css" href="{% static 'css/font.css' %}" data-noprefix="">
+
+
+  <!-- Load Jquery -->
+  <script src="{% static 'js/jquery.js' %}"></script>
+
+
+
+  <title>SCS | Contests</title>
+  <!-- Meta Tag -->
+
+  <!-- For all browsers -->
+
+  <link href="{% static 'css/external-core.css' %}" media="all" rel="stylesheet">
+  <link href="{% static 'css/scs.css' %}" media="all" rel="stylesheet">
+
+
+
+  <meta name="viewport" content="width=device-width">
+</head>
+
+  <body class="work" style="zoom: 1;">
+  <div id="main" class="work hrwHome static-home hrw-home new-home dev-home">
+
+  {% load socialaccount %}
+      {% providers_media_js %}
+  <div class="static-topbar hrw-home-topbar">
+    <div class="container clearfix">
+        <a href="{% url 'index' %}" class="pull-left hrw-logo static-logo">
+          <div class="js-dark-logo" style="display: none;">
+            <svg width="185" height="55">
+				 <image xlink:href="{% static 'images/logo_light.jpg' %}" src="{% static 'images/logo_light.jpg' %}" width="185" height="55"></image>
+
+            </svg>
+          </div>
+          <div class="js-light-logo" style="display: block;">
+            <svg width="185" height="55">
+				<image xlink:href="{% static 'images/logo.png' %}" src="{% static 'images/logo.png' %}" width="185" height="55"></image>
+            </svg>
+          </div>
+        </a>
+      <a href="" class="nav-toggle pull-right mmT"><i class="icon-menu-large"></i></a>
+      <nav class="static-home-nav">
+        <span class="static-nav static-links">
+          <a class="static-link active" href="{% url 'index' %}">Home</a>
+          <span class="work-navgroup static-link">
+          <a class="static-link " target="_blank" href="http://www.evolvescs.com">SCS</a>
+          </span>
+          <a class="static-link" href="{% url 'contests_list' %}">Contest</a>
+        </span>
+        <span class="static-auth hrw-home-auth">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'myprofile' %}" class="btn btn-line btn-flat btn-green">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                <a href="/accounts/logout" class="msL btn btn-flat btn-green">Log out</a>
+            {% else %}
+            <a href="{% provider_login_url "facebook" method="js_sdk" fields="gender" %}" class="msL btn btn-flat btn-green">Login</a>
+            {% endif %}
+        </span>
+      </nav>
+
+    </div>
+  </div>
+</div>
+
+  {% block body_content %}
+
+  {% endblock %}
+
+
+
+<script src="{% static 'js/canvas.js' %}"></script>
+  <script>
+
+  /* Navigation */
+  $(".js-dark-logo").hide();
+  $(".js-light-logo").show();
+  $(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+	if (scroll < 50) {
+        $(".static-topbar").removeClass("dark-bg");
+        $(".js-light-logo").show();
+        $(".js-dark-logo").hide();
+    }
+    else if (scroll >= 100) {
+        $(".static-topbar").addClass("dark-bg");
+        $(".js-light-logo").hide();
+        $(".js-dark-logo").show();
+    }
+  });
+
+
+
+
+  </script>
+
+  <div class="plT plB static-footer white_footer">
+    <div class="container--flex">
+      <div class="row mlT mlB">
+        <div class="span-xs-16 span-lg-2ofthree x-footer-links">
+          <div class="row">
+            <ul class="unstyled mlB span-xs-16 span-sm-third">
+              <li><p class="color-alt-grey mmB"><strong>Company</strong></p></li>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Interns</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">Blog</a></li>
+            </ul>
+            <ul class="unstyled mlB span-xs-16 span-sm-third">
+              <li><p class="color-alt-grey mmB"><strong>Docs</strong></p></li>
+              <li><a href="">Scoring</a></li>
+              <li><a href="">Environment</a></li>
+              <li><a href="">FAQ</a></li>
+            </ul>
+            <ul class="unstyled mlB span-xs-16 span-sm-third">
+              <li><p class="color-alt-grey mmB"><strong>Other</strong></p></li>
+              <li><a href="">Privacy Policy</a></li>
+              <li><a href="" target="_blank">Freenode</a></li>
+              <li><a href="">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span-xs-16 span-sm-16 span-lg-third x-footer-brand">
+          <div class="static-content static-navigation-logo" style="background-image:url('{% static 'images/logo_light.jpg' %}')">
+		  <svg width="185" height="55">
+				 <image xlink:href="{% static 'images/logo_light.jpg' %}" src="{% static 'images/logo_light.jpg' %}" width="185" height="55"></image>
+
+            </svg>
+		  </div>
+          <p>&copy 2016 SCS</p>
+          <p class="msT"><a href="https://www.facebook.com/evolvescs" target="_blank">Facebook</a> - <a href="" target="_blank">Twitter</a> - <a href="" target="_blank">LinkedIn</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+  </body>
+</html>
+
